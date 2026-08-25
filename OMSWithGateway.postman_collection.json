@@ -1,0 +1,317 @@
+{
+  "info": {
+    "_postman_id": "4623c31a-1218-4c86-90b4-9597b87b01aa",
+    "name": "OMSWithGateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "41600686"
+  },
+  "item": [
+    {
+      "name": "1-CreateOrderWithGateway",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwYXJpQGV4YW1wbGUuY29tIiwiaWF0IjoxNzg3NTYxMTk0LCJleHAiOjE3ODc1NjQ3OTR9.adaD-NhjXHUX4aTKrbQ9JMKQoPTHtVdLLwMdjrjePBQ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": 2009,\r\n  \"orderDate\": \"2026-08-17T15:30:00\",\r\n  \"status\": \"Submitted\",\r\n  \"totalAmount\": 450.00,\r\n  \"commerceItems\": [\r\n    { \"productId\": \"prod506\", \"quantity\": 2, \"unitPrice\": 100.00 },\r\n    { \"productId\": \"prod507\", \"quantity\": 1, \"unitPrice\": 250.00 }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/oms",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oms"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1.1-RegisterUserWithGateway",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Shrinidhi\",\r\n    \"email\": \"shrinidhi@example.com\",\r\n    \"password\": \"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1.2-LoginUserWithGateway",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"shr@example.com\",\"password\":\"12345\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1.3-GetUserWithGateway",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpbmlkaGlAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODc1NjIxMjAsImV4cCI6MTc4NzU2NTcyMH0.X-nApFFUB5Cl_dPnek_UQHaEn9BeIC3CmLdrUUrmxeo",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/users/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1.4-GetUserByIdWithGateway",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpa2FudGRlc2htdWtoQGdtYWlsLmNvbSIsImlhdCI6MTc4NzU0OTQyMCwiZXhwIjoxNzg3NTUzMDIwfQ.Jfudv8jX7GzhNslAgnr6fPijPoIl6SwHANQIDRx0xGY",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"shr@example.com\",\"password\":\"12345\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/users/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2-GetOrderWithGateway",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpbmlkaGlAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODc1NjIxMjAsImV4cCI6MTc4NzU2NTcyMH0.X-nApFFUB5Cl_dPnek_UQHaEn9BeIC3CmLdrUUrmxeo",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/oms/orders/MW6391757",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oms",
+            "orders",
+            "MW6391757"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3-ReserveInventoryWithGateway",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpbmlkaGlAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODc1NjIxMjAsImV4cCI6MTc4NzU2NTcyMH0.X-nApFFUB5Cl_dPnek_UQHaEn9BeIC3CmLdrUUrmxeo",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/inventory/reserve/MW6391757",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "inventory",
+            "reserve",
+            "MW6391757"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4-FulfillmentOrderWithGateway",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpbmlkaGlAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODc1NjIxMjAsImV4cCI6MTc4NzU2NTcyMH0.X-nApFFUB5Cl_dPnek_UQHaEn9BeIC3CmLdrUUrmxeo",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/fulfillment/start/MW7277463",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "fulfillment",
+            "start",
+            "MW7277463"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5.1-PickupOrder-BOPISWithGateway",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": 2001,\r\n  \"orderDate\": \"2026-08-16T15:30:00\",\r\n  \"status\": \"Submitted\",\r\n  \"totalAmount\": 450.00,\r\n  \"commerceItems\": [\r\n    { \"productId\": \"prod501\", \"quantity\": 2, \"unitPrice\": 100.00 },\r\n    { \"productId\": \"prod502\", \"quantity\": 1, \"unitPrice\": 250.00 }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/oms/orders/MB5710937/pickup",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "oms",
+            "orders",
+            "MB5710937",
+            "pickup"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5-ShipOrderWithGateway",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzaHJpbmlkaGlAZXhhbXBsZS5jb20iLCJpYXQiOjE3ODc1NjIxMjAsImV4cCI6MTc4NzU2NTcyMH0.X-nApFFUB5Cl_dPnek_UQHaEn9BeIC3CmLdrUUrmxeo",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/shipping/ship/MB5743982",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "shipping",
+            "ship",
+            "MB5743982"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
