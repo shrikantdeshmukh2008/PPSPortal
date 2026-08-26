@@ -1,0 +1,75 @@
+Step by step workflow to create and run the Docker image for your first service (Service Registry):
+Step 1: Start Docker Desktop
+Make sure Docker Desktop is running (you’ll see the whale icon in your taskbar).
+
+Without this, commands in CMD/PowerShell will fail with “Cannot connect to Docker daemon”.
+
+Step 2: Verify Docker is Active
+Run:
+	docker --version
+	docker ps
+
+Step 3: Build the JAR
+
+Compile your Spring Boot project into a runnable JAR file.
+
+Open Command Prompt → Navigate to gateway-service folder
+
+Run: mvn clean package -DskipTests
+
+Verify JAR is created in target/ folder
+
+Step 4: Create Dockerfile
+Define how Docker should package your service.
+
+Inside gateway-service folder
+
+Use base image: FROM eclipse-temurin:17-jdk
+
+Copy JAR: COPY target/gateway-service-0.0.1-SNAPSHOT.jar /usr/app/
+
+Set workdir: WORKDIR /usr/app/
+
+Expose port: EXPOSE 8080
+
+Entrypoint: ENTRYPOINT ["java","-jar","gateway-service-0.0.1-SNAPSHOT.jar"]
+
+Step 4: Build Docker Image
+Convert your JAR + Dockerfile into a Docker image.
+
+Run in Command Prompt
+
+Navigate to gateway-service folder
+
+Run: docker build -t gateway-service:latest .
+
+Verify with: docker images
+
+Step 5: Run Docker Container
+Start the service inside a Docker container.
+
+Run in Command Prompt
+
+Run: docker run -d -p 8080:8080 gateway-service
+
+Check running containers: docker ps
+
+Verify Config Server is running and serving configs. at: http://localhost:8080/ff-oms-integration-service/default
+
+Step 6: Push to Docker Hub (Optional)
+Share your image publicly if needed.
+
+Run in Command Prompt
+
+Login: docker login
+
+Tag: docker tag gateway-service:latest your-dockerhub-username/gateway-service:latest
+
+Push: docker push your-dockerhub-username/gateway-service:latest
+
+✅ Summary:
+
+Local laptop → build JAR, build image, run container, verify at http://localhost:8080/ff-oms-integration-service/default
+
+Docker Hub → optional, only if you want to share or deploy remotely.
+
