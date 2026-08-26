@@ -1,0 +1,75 @@
+Step by step workflow to create and run the Docker image for your first service (Service Registry):
+Step 1: Start Docker Desktop
+Make sure Docker Desktop is running (you’ll see the whale icon in your taskbar).
+
+Without this, commands in CMD/PowerShell will fail with “Cannot connect to Docker daemon”.
+
+Step 2: Verify Docker is Active
+Run:
+	docker --version
+	docker ps
+
+Step 3: Build the JAR
+
+Compile your Spring Boot project into a runnable JAR file.
+
+Open Command Prompt → Navigate to service-registry folder
+
+Run: mvn clean package -DskipTests
+
+Verify JAR is created in target/ folder
+
+Step 4: Create Dockerfile
+Define how Docker should package your service.
+
+Inside service-registry folder
+
+Use base image: FROM eclipse-temurin:17-jdk
+
+Copy JAR: COPY target/service-registry-0.0.1-SNAPSHOT.jar /usr/app/
+
+Set workdir: WORKDIR /usr/app/
+
+Expose port: EXPOSE 8761
+
+Entrypoint: ENTRYPOINT ["java","-jar","service-registry-0.0.1-SNAPSHOT.jar"]
+
+Step 4: Build Docker Image
+Convert your JAR + Dockerfile into a Docker image.
+
+Run in Command Prompt
+
+Navigate to service-registry folder
+
+Run: docker build -t service-registry:latest .
+
+Verify with: docker images
+
+Step 5: Run Docker Container
+Start the service inside a Docker container.
+
+Run in Command Prompt
+
+Run: docker run -d -p 8761:8761 service-registry
+
+Check running containers: docker ps
+
+Verify Eureka dashboard at: http://localhost:8761
+
+Step 6: Push to Docker Hub (Optional)
+Share your image publicly if needed.
+
+Run in Command Prompt
+
+Login: docker login
+
+Tag: docker tag service-registry:latest your-dockerhub-username/service-registry:latest
+
+Push: docker push your-dockerhub-username/service-registry:latest
+
+✅ Summary:
+
+Local laptop → build JAR, build image, run container, verify at http://localhost:8761.
+
+Docker Hub → optional, only if you want to share or deploy remotely.
+
